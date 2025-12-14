@@ -34,3 +34,16 @@ def generate_summaries(scores, level):
         student_summary += "Great job! Continue refining and scaling this project."
 
     return recruiter_summary, student_summary
+
+def generate_score_explanation(scores):
+    explanation = []
+
+    for dimension, score in scores.items():
+        if score >= 7:
+            explanation.append(f"{dimension} is strong, indicating good engineering practices.")
+        elif score >= 5:
+            explanation.append(f"{dimension} is acceptable but has room for improvement.")
+        else:
+            explanation.append(f"{dimension} is weak and needs immediate attention.")
+
+    return explanation

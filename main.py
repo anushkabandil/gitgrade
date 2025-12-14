@@ -1,8 +1,13 @@
 from github_fetcher import fetch_repo_data
 from analyzer import analyze_repository
 from scorer import score_repository
-from summary import generate_summaries
 from roadmap import generate_roadmap
+from summary import generate_summaries, generate_score_explanation
+from analyzer import extract_skills
+from roadmap import explain_roadmap
+
+
+
 
 def main():
     print("GitGrade - GitHub Repository Evaluator")
@@ -11,7 +16,10 @@ def main():
     try:
         data = fetch_repo_data(repo_url)
         signals = analyze_repository(data)
-        scores, overall_score, level = score_repository(signals)
+        skills = extract_skills(data)
+
+        scores, overall_score, level, recruiter_confidence = score_repository(signals)
+
 
         recruiter_summary, student_summary = generate_summaries(scores, level)
         roadmap = generate_roadmap(scores)
@@ -24,6 +32,11 @@ def main():
 
         print(f"\nOverall Score: {overall_score}/10")
         print(f"Repository Level: {level}")
+        print(f"Recruiter Confidence Level: {recruiter_confidence}")
+        print("\nDetected Skills (Resume-Ready):")
+        for skill in skills:
+            print("-", skill)
+
 
         print("\nRecruiter Perspective:")
         print(recruiter_summary)
@@ -34,6 +47,19 @@ def main():
         print("\nPersonalized Roadmap:")
         for idx, step in enumerate(roadmap, start=1):
             print(f"{idx}. {step}")
+
+        print("\nWhy This Roadmap?")
+        print(explain_roadmap(roadmap))
+
+
+        print("\nWhy These Scores?")
+        score_explanation = generate_score_explanation(scores)
+
+        for point in score_explanation:
+            print("-", point)
+
+
+        
 
         print("\n=======================================================\n")
 

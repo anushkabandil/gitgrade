@@ -26,3 +26,20 @@ def analyze_repository(data):
     }
 
     return signals
+
+def extract_skills(data):
+    skills = []
+
+    # Languages directly represent technical skills
+    for lang in data.get("languages", []):
+        skills.append(lang)
+
+    # Git usage as a skill
+    if data.get("commit_count", 0) >= 3:
+        skills.append("Version Control (Git)")
+
+    # Documentation skill
+    if data.get("description"):
+        skills.append("Technical Documentation")
+
+    return list(set(skills))

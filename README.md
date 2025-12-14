@@ -1,4 +1,10 @@
-# GitGrade 🚀  
+# GitGrade 🚀 
+
+## 🎥 Demo Video (End-to-End Working)
+
+Watch the complete working demo of GitGrade here:  
+👉 https://drive.google.com/file/d/1iPWiAro_aPMomAXFOPf9gN4C_Lf8S4ue/view?usp=drive_link
+
 ### Intelligent GitHub Repository Evaluation & Developer Profiling
 
 GitGrade is an intelligent system that analyzes a public GitHub repository and converts it into a **dimension-wise score, recruiter-style evaluation, and a personalized learning roadmap**.
